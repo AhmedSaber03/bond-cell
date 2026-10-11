@@ -15,10 +15,10 @@ const NotFound = () => {
   }, [location.pathname]);
 
   return (
-    <div className="min-h-screen bg-gradient-nexatech flex items-center justify-center p-4">
+    <div className="min-h-screen bg-gradient-bondcell flex items-center justify-center p-4">
       <div className="text-center max-w-2xl">
         <div className="flex justify-center mb-8">
-          <Logo className="w-40" />
+          <Logo />
         </div>
 
         <div className="card-premium p-12 space-y-6">
@@ -39,7 +39,7 @@ const NotFound = () => {
 
           <div className="flex flex-col sm:flex-row gap-4 justify-center pt-6">
             <Link to="/">
-              <Button className="btn-nexatech w-full sm:w-auto">
+              <Button className="btn-bondcell w-full sm:w-auto">
                 <Home className="w-4 h-4 mr-2" />
                 Back to Home
               </Button>
@@ -47,7 +47,7 @@ const NotFound = () => {
             <Link to="/products">
               <Button
                 variant="outline"
-                className="btn-outline-nexatech w-full sm:w-auto"
+                className="btn-outline-bondcell w-full sm:w-auto"
               >
                 Browse Products
               </Button>

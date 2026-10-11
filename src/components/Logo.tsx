@@ -1,16 +1,19 @@
 import { Link } from "react-router-dom";
-import logo from "../../public/NexaLogo.png";
+import { LOGO_CLASS_DEFAULT, LOGO_SRC } from "@/lib/brand";
+import { cn } from "@/lib/utils";
 
 const Logo = ({ className }: { className?: string }) => {
   return (
-    <Link to="/" className="flex items-center gap-3 group">
-      <div className="relative">
-        <img
-          src={logo}
-          alt="logo"
-          className={`"place-self-center hover:scale-105 transition-all duration-300" ${className}`}
-        />
-      </div>
+    <Link to="/" className="flex items-center group">
+      <img
+        src={LOGO_SRC}
+        alt="Bond&Cell"
+        className={cn(
+          LOGO_CLASS_DEFAULT,
+          "hover:opacity-90 transition-opacity duration-300",
+          className
+        )}
+      />
     </Link>
   );
 };

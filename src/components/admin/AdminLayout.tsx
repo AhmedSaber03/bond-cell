@@ -1,8 +1,7 @@
 import { ReactNode, useState } from "react";
 import { useNavigate, useLocation, Link } from "react-router-dom";
 import { supabase } from "@/integrations/supabase/client";
-import logo from "../../../public/NexaLogo.png";
-import Logo from "@/components/Logo";
+import { LOGO_CLASS_DEFAULT, LOGO_SRC } from "@/lib/brand";
 import {
   LayoutDashboard,
   Package,
@@ -61,9 +60,9 @@ const AdminLayout = ({ children }: AdminLayoutProps) => {
         </div> */}
         <Link to="/" className={`${sidebarOpen ? "p-8" : "p-4"}`}>
           <img
-            src={logo}
-            alt="logo"
-            className="w-32 place-self-center hover:scale-105 transition-all duration-300"
+            src={LOGO_SRC}
+            alt="Bond&Cell"
+            className={`${LOGO_CLASS_DEFAULT} place-self-center hover:opacity-90 transition-opacity duration-300`}
           />
         </Link>
 
@@ -109,7 +108,7 @@ const AdminLayout = ({ children }: AdminLayoutProps) => {
       {/* Mobile Header */}
       <div className="md:hidden fixed top-0 left-0 right-0 z-50 bg-sidebar border-b border-sidebar-border">
         <div className="flex items-center justify-between p-4">
-          <img src={logo} alt="logo" className="w-32" />
+          <img src={LOGO_SRC} alt="Bond&Cell" className={LOGO_CLASS_DEFAULT} />
           <Button
             variant="ghost"
             size="icon"

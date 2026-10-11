@@ -7,7 +7,7 @@ import {
   AccordionTrigger,
 } from "@/components/ui/accordion";
 import { Button } from "@/components/ui/button";
-import { Mail, HelpCircle } from "lucide-react";
+import { Mail } from "lucide-react";
 import {
   FALLBACK_FAQS,
   FAQ_INTRO,
@@ -15,8 +15,15 @@ import {
   FAQ_CATEGORIES,
   type FaqItem,
 } from "@/data/faqContent";
+import { SUPPORT_EMAIL } from "@/lib/brand";
+import { cn } from "@/lib/utils";
 
-const FaqSection = () => {
+interface FaqSectionProps {
+  layout?: "default" | "split";
+  className?: string;
+}
+
+const FaqSection = ({ layout = "default", className }: FaqSectionProps) => {
   const [faqs, setFaqs] = useState<FaqItem[]>(FALLBACK_FAQS);
   const [isLoading, setIsLoading] = useState(true);
 
@@ -62,63 +69,77 @@ const FaqSection = () => {
     return result;
   }, [faqs]);
 
-  return (
-    <section id="faq" className="mt-32 scroll-mt-28">
-      <div className="text-center max-w-3xl mx-auto mb-12">
-        <div className="inline-flex items-center gap-2 px-4 py-2 bg-white rounded-full shadow-md mb-6">
-          <HelpCircle className="w-4 h-4 text-primary" />
-          <span className="text-sm font-semibold text-primary">FAQ</span>
-        </div>
-        <h2 className="text-3xl md:text-5xl font-bold text-primary mb-4">
-          Frequently asked questions
-        </h2>
-        <p className="text-gray-600 text-lg leading-relaxed">{FAQ_INTRO}</p>
-      </div>
+  const headerBlock = (
+    <>
+      <span className="accent-chip mb-6">Step 03 · FAQ</span>
+      <h2 className="text-3xl md:text-4xl lg:text-5xl font-extralight text-primary mb-4 leading-tight">
+        Answers for labs
+        <span className="block font-normal">and procurement teams</span>
+      </h2>
+      <p className="text-muted-foreground text-lg leading-relaxed">{FAQ_INTRO}</p>
+    </>
+  );
 
-      <div className="space-y-8 max-w-4xl mx-auto">
-        {isLoading ? (
-          <div className="card-premium p-8 text-center text-muted-foreground">
-            Loading FAQs...
+  const faqList = (
+    <div className="space-y-6">
+      {isLoading ? (
+        <div className="card-premium p-8 text-center text-muted-foreground">
+          Loading FAQs...
+        </div>
+      ) : (
+        grouped.map(([category, items]) => (
+          <div key={category} className="border border-primary/10 bg-white p-6 md:p-8">
+            <h3 className="text-xs font-bold uppercase tracking-widest text-primary/60 mb-4">
+              {category}
+            </h3>
+            <Accordion type="single" collapsible className="w-full">
+              {items.map((faq, index) => (
+                <AccordionItem
+                  key={faq.id || `${category}-${index}`}
+                  value={faq.id || `${category}-${index}`}
+                  className="border-primary/10"
+                >
+                  <AccordionTrigger className="text-left text-base font-medium text-primary hover:no-underline py-4">
+                    {faq.question}
+                  </AccordionTrigger>
+                  <AccordionContent className="text-muted-foreground leading-relaxed text-[15px] pb-4">
+                    {faq.answer}
+                  </AccordionContent>
+                </AccordionItem>
+              ))}
+            </Accordion>
           </div>
-        ) : (
-          grouped.map(([category, items]) => (
-            <div key={category} className="card-premium p-6 md:p-8">
-              <h3 className="text-xl font-bold text-primary mb-4">
-                {category}
-              </h3>
-              <Accordion type="single" collapsible className="w-full">
-                {items.map((faq, index) => (
-                  <AccordionItem
-                    key={faq.id || `${category}-${index}`}
-                    value={faq.id || `${category}-${index}`}
-                    className="border-border"
-                  >
-                    <AccordionTrigger className="text-left text-base font-semibold text-foreground hover:no-underline hover:text-primary">
-                      {faq.question}
-                    </AccordionTrigger>
-                    <AccordionContent className="text-gray-600 leading-relaxed text-[15px]">
-                      {faq.answer}
-                    </AccordionContent>
-                  </AccordionItem>
-                ))}
-              </Accordion>
-            </div>
-          ))
-        )}
+        ))
+      )}
 
-        <div className="rounded-2xl border border-primary/15 bg-gradient-to-br from-primary/5 via-white to-blue-50 p-8 text-center space-y-5">
-          <h3 className="text-xl font-bold text-primary">Still stuck?</h3>
-          <p className="text-gray-600 max-w-2xl mx-auto leading-relaxed">
-            {FAQ_BOTTOM}
-          </p>
-          <Button asChild className="btn-hero">
-            <a href="mailto:sales@nexabiotech.net">
-              <Mail className="w-4 h-4 mr-2" />
-              Contact support
-            </a>
-          </Button>
-        </div>
+      <div className="border border-primary/10 bg-muted/40 p-8 space-y-5">
+        <h3 className="text-lg font-semibold text-primary">Still stuck?</h3>
+        <p className="text-muted-foreground leading-relaxed">{FAQ_BOTTOM}</p>
+        <Button asChild className="btn-hero rounded-md">
+          <a href={`mailto:${SUPPORT_EMAIL}`}>
+            <Mail className="w-4 h-4 mr-2" />
+            Contact support
+          </a>
+        </Button>
       </div>
+    </div>
+  );
+
+  if (layout === "split") {
+    return (
+      <section id="faq" className={cn("scroll-mt-28", className)}>
+        <div className="grid lg:grid-cols-12 gap-10 lg:gap-16 items-start">
+          <div className="lg:col-span-4 lg:sticky lg:top-32">{headerBlock}</div>
+          <div className="lg:col-span-8">{faqList}</div>
+        </div>
+      </section>
+    );
+  }
+
+  return (
+    <section id="faq" className={cn("mt-32 scroll-mt-28", className)}>
+      <div className="text-center max-w-3xl mx-auto mb-12">{headerBlock}</div>
+      <div className="space-y-8 max-w-4xl mx-auto">{faqList}</div>
     </section>
   );
 };

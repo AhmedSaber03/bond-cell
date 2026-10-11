@@ -2,6 +2,8 @@ import { useState, useEffect } from "react";
 import { useSearchParams } from "react-router-dom";
 import { supabase } from "@/integrations/supabase/client";
 import Header from "@/components/layout/Header";
+import SiteFooter from "@/components/layout/SiteFooter";
+import { BRAND_NAME } from "@/lib/brand";
 import ProductCard from "@/components/ProductCard";
 import ProductDetailModal from "@/components/ProductDetailModal";
 import StockRequestDialog from "@/components/StockRequestDialog";
@@ -76,27 +78,26 @@ const AllProducts = () => {
   };
 
   return (
-    <div className="min-h-screen bg-gradient-to-br from-gray-50 via-white to-blue-50">
+    <div className="min-h-screen bg-gradient-bondcell">
       <Header />
 
       <main className="container mx-auto px-4 pt-32 pb-20">
         <div className="max-w-7xl mx-auto">
           {/* Enhanced Page Header */}
           <div className="text-center mb-12 animate-fade-in">
-            <div className="inline-flex items-center gap-2 px-5 py-2.5 bg-gradient-to-r from-primary/10 to-blue-500/10 rounded-full text-primary text-sm font-bold mb-6 shadow-md">
+            <div className="inline-flex items-center gap-2 px-5 py-2.5 bg-white/90 border border-primary/10 rounded-full text-primary text-sm font-bold mb-6 shadow-sm">
               <Sparkles className="w-4 h-4" />
-              Premium Product Catalog
+              Peptide catalog
             </div>
             <h1 className="text-4xl md:text-6xl font-black text-primary mb-6 leading-tight">
-              Discover Nexa Biotech
-              <span className="block text-transparent bg-clip-text bg-gradient-to-r from-primary via-blue-600 to-primary">
-                Authentic Products
+              Explore {BRAND_NAME}
+              <span className="block text-transparent bg-clip-text bg-gradient-accent">
+                research peptides
               </span>
             </h1>
-            <p className="text-xl text-gray-600 max-w-3xl mx-auto leading-relaxed">
-              Browse our complete range of German-manufactured products. Every
-              product comes with unique serial verification for guaranteed
-              authenticity.
+            <p className="text-xl text-muted-foreground max-w-3xl mx-auto leading-relaxed">
+              Browse SKUs, review specifications, and request bulk availability.
+              Every unit includes serial verification for guaranteed authenticity.
             </p>
           </div>
 
@@ -174,19 +175,18 @@ const AllProducts = () => {
 
           {/* Trust Section */}
           {!isLoading && filteredProducts.length > 0 && (
-            <div className="mt-20 p-10 rounded-3xl bg-gradient-to-br from-primary/5 via-blue-50 to-primary/5 border-2 border-primary/10 shadow-xl">
+            <div className="mt-20 p-10 rounded-3xl bg-white/90 border border-primary/10 shadow-xl">
               <div className="text-center max-w-3xl mx-auto">
-                <div className="inline-flex items-center justify-center w-16 h-16 bg-gradient-to-br from-primary to-blue-600 rounded-2xl shadow-lg mb-6">
+                <div className="inline-flex items-center justify-center w-16 h-16 bg-gradient-primary rounded-2xl shadow-lg shadow-primary/20 mb-6">
                   <Shield className="w-8 h-8 text-white" />
                 </div>
                 <h3 className="text-3xl font-bold text-primary mb-4">
-                  100% Authentic Guarantee
+                  Authenticity built in
                 </h3>
-                <p className="text-lg text-gray-600 leading-relaxed">
-                  Every Nexa Biotech product comes with a unique serial number
-                  and verification code. Our advanced authentication system
-                  ensures you receive only genuine products manufactured in
-                  Germany.
+                <p className="text-lg text-muted-foreground leading-relaxed">
+                  Every {BRAND_NAME} product ships with a unique serial number
+                  and one-time verification code so you can confirm genuine
+                  peptides before they reach your lab.
                 </p>
               </div>
             </div>
@@ -221,32 +221,7 @@ const AllProducts = () => {
         </div>
       </footer> */}
 
-      <footer className="border-t border-gray-200 bg-white/50 backdrop-blur-sm">
-        <div className="container-nexatech py-12">
-          <div className="flex flex-col md:flex-row items-center justify-between gap-6">
-            <div className="flex items-center gap-2 text-sm text-gray-600">
-              <Shield className="w-4 h-4 text-primary" />
-              <span>Protected by Nexa Biotech Authentication System</span>
-            </div>
-            <div className="flex flex-col md:flex-row items-center gap-4 text-sm text-gray-600">
-              <p>
-                For inquiries and bulk orders, please contact us at <br />
-                <a
-                  href="mailto:sales@nexabiotech.net"
-                  className="font-bold bg-gradient-to-r from-[#002447] to-[#0062F7] bg-clip-text text-transparent opacity-80 hover:opacity-100 transition-opacity duration-300"
-                >
-                  sales@nexabiotech.net
-                </a>
-              </p>
-            </div>
-          </div>
-          <div className="mt-6 pt-6 border-t border-gray-200 text-center text-xs text-gray-500">
-            <span>© {new Date().getFullYear()} Nexa Biotech Solutions.</span>
-            <span className="hidden md:inline">•</span>
-            <span>All rights reserved.</span>
-          </div>
-        </div>
-      </footer>
+      <SiteFooter />
 
       {/* Product Details Dialog */}
       <ProductDetailModal

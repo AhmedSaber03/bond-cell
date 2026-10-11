@@ -7,7 +7,8 @@ import { Input } from "@/components/ui/input";
 import { Label } from "@/components/ui/label";
 import { useToast } from "@/hooks/use-toast";
 import { Loader2, ShieldCheck, Key, Lock } from "lucide-react";
-import logo from "../../public/NexaLogo.png";
+import { LOGO_CLASS_FORM, LOGO_SRC } from "@/lib/brand";
+import { cn } from "@/lib/utils";
 
 interface VerifyResult {
   success: boolean;
@@ -18,7 +19,15 @@ interface VerifyResult {
   first_verification?: boolean;
 }
 
-const VerificationForm = () => {
+interface VerificationFormProps {
+  showLogo?: boolean;
+  className?: string;
+}
+
+const VerificationForm = ({
+  showLogo = true,
+  className,
+}: VerificationFormProps) => {
   const [serialNumber, setSerialNumber] = useState("");
   const [password, setPassword] = useState("");
   const [isVerifying, setIsVerifying] = useState(false);
@@ -86,14 +95,30 @@ const VerificationForm = () => {
   };
 
   return (
-    <div className="card-premium p-8 md:p-10 shadow-2xl">
-      <div className="text-center mb-8">
-        <img src={logo} alt="Logo" className="w-40 mx-auto mb-8" />
-        <h2 className="text-2xl md:text-3xl font-bold text-primary mb-2">
-          Verify Authenticity
+    <div className={cn("card-premium-dark p-8 md:p-10", className)}>
+      <div className={cn("mb-8", showLogo ? "text-center" : "text-left")}>
+        {showLogo && (
+          <img
+            src={LOGO_SRC}
+            alt="Bond&Cell"
+            width={400}
+            height={100}
+            className={cn(LOGO_CLASS_FORM, "mx-auto mb-6")}
+          />
+        )}
+        <p
+          className={cn(
+            "accent-chip mb-4 w-fit",
+            showLogo ? "mx-auto" : "mx-0"
+          )}
+        >
+          Peptide verification
+        </p>
+        <h2 className="text-2xl md:text-3xl font-light tracking-tight text-primary mb-2">
+          Check authenticity
         </h2>
-        <p className="text-gray-600">
-          Enter your product credentials to verify
+        <p className="text-muted-foreground">
+          Serial number plus scratch-off code from your vial packaging
         </p>
       </div>
 
@@ -101,33 +126,33 @@ const VerificationForm = () => {
         <div className="space-y-2">
           <Label
             htmlFor="serial"
-            className="text-sm font-semibold text-gray-700 flex items-center gap-2"
+            className="text-xs font-semibold uppercase tracking-wider text-primary/80 flex items-center gap-2"
           >
             <Key className="w-4 h-4 text-primary" />
-            Serial Number
+            Serial number
           </Label>
           <Input
             id="serial"
             type="text"
-            placeholder="NXB-XXXX-XXXX-XXXX"
+            placeholder="BNC-XXXX-XXXX-XXXX"
             value={serialNumber}
             onChange={(e) => setSerialNumber(e.target.value.toUpperCase())}
-            className="input-nexatech font-mono text-lg"
+            className="input-bondcell font-mono text-lg rounded-md"
             required
             disabled={isVerifying}
           />
-          <p className="text-xs text-gray-500">
-            Found inside your product packaging
+          <p className="text-xs text-muted-foreground">
+            Printed on the outer label
           </p>
         </div>
 
         <div className="space-y-2">
           <Label
             htmlFor="password"
-            className="text-sm font-semibold text-gray-700 flex items-center gap-2"
+            className="text-xs font-semibold uppercase tracking-wider text-primary/80 flex items-center gap-2"
           >
             <Lock className="w-4 h-4 text-primary" />
-            Password
+            Verification code
           </Label>
           <Input
             id="password"
@@ -135,19 +160,19 @@ const VerificationForm = () => {
             placeholder="XXXXXXXX"
             value={password}
             onChange={(e) => setPassword(e.target.value.toUpperCase())}
-            className="input-nexatech font-mono text-lg"
+            className="input-bondcell font-mono text-lg rounded-md"
             required
             disabled={isVerifying}
           />
-          <p className="text-xs text-gray-500">
-            8-character verification code
+          <p className="text-xs text-muted-foreground">
+            8 characters under the scratch panel
           </p>
         </div>
 
         <Button
           type="submit"
           disabled={isVerifying}
-          className="w-full btn-nexatech text-lg py-6"
+          className="w-full btn-bondcell text-lg py-6 rounded-md"
         >
           {isVerifying ? (
             <>
@@ -157,18 +182,18 @@ const VerificationForm = () => {
           ) : (
             <>
               <ShieldCheck className="w-5 h-5 mr-2" />
-              Verify Product
+              Verify product
             </>
           )}
         </Button>
       </form>
 
-      <div className="mt-6 p-4 bg-blue-50 border border-blue-100 rounded-xl">
+      <div className="mt-6 p-4 bg-muted border border-primary/10 rounded-md">
         <div className="text-sm">
-          <p className="font-semibold text-blue-900 mb-1">Secure Verification</p>
-          <p className="text-blue-700">
-            Each code can be verified once. After verification you have a
-            60-minute viewing window, then the code is permanently locked.
+          <p className="font-semibold text-primary mb-1">One-time secure check</p>
+          <p className="text-muted-foreground leading-relaxed">
+            Each code works once. After a successful verify you have a 60-minute
+            viewing window, then the code locks permanently.
           </p>
         </div>
       </div>

@@ -5,24 +5,24 @@
 @layer base {
   :root {
     --background: 0 0% 100%;
-    --foreground: 210 100% 14%;
+    --foreground: 178 79% 15%;
 
     --card: 0 0% 100%;
-    --card-foreground: 210 100% 14%;
+    --card-foreground: 178 79% 15%;
 
     --popover: 0 0% 100%;
-    --popover-foreground: 210 100% 14%;
+    --popover-foreground: 178 79% 15%;
 
-    --primary: 210 100% 14%;
+    --primary: 178 79% 15%;
     --primary-foreground: 0 0% 100%;
 
-    --secondary: 0 0% 100%;
-    --secondary-foreground: 210 100% 14%;
+    --secondary: 27 60% 92%;
+    --secondary-foreground: 178 79% 15%;
 
-    --muted: 210 20% 97%;
-    --muted-foreground: 215 16% 47%;
+    --muted: 180 8% 96%;
+    --muted-foreground: 178 12% 38%;
 
-    --accent: 213 100% 50%;
+    --accent: 177 80% 20%;
     --accent-foreground: 0 0% 100%;
 
     --destructive: 4 90% 58%;
@@ -34,9 +34,9 @@
     --warning: 36 100% 50%;
     --warning-foreground: 0 0% 100%;
 
-    --border: 214 32% 91%;
-    --input: 214 32% 91%;
-    --ring: 210 100% 14%;
+    --border: 178 25% 88%;
+    --input: 178 25% 88%;
+    --ring: 178 79% 15%;
 
     --radius: 0.75rem;
   }
@@ -47,45 +47,58 @@
     @apply border-border;
   }
   body {
-    @apply bg-background text-foreground;
+    @apply bg-background text-foreground antialiased;
+    font-family: "Outfit", system-ui, sans-serif;
     font-feature-settings: "rlig" 1, "calt" 1;
   }
 }
 
 @layer components {
-  /* Premium Gradient Background */
-  .bg-gradient-nexatech {
-    @apply bg-gradient-to-br from-white via-blue-50 to-primary-50;
+  .bg-surface-bondcell {
+    @apply bg-white;
+    background-image:
+      linear-gradient(rgba(8, 71, 69, 0.035) 1px, transparent 1px),
+      linear-gradient(90deg, rgba(8, 71, 69, 0.035) 1px, transparent 1px);
+    background-size: 56px 56px;
   }
 
-  /* Premium Card Styles */
+  .bg-gradient-bondcell {
+    @apply bg-surface-bondcell;
+  }
+
   .card-premium {
-    @apply bg-white rounded-2xl shadow-lg border border-gray-100 hover:shadow-xl transition-all duration-300;
+    @apply bg-white rounded-lg shadow-md border border-primary/10 hover:shadow-lg transition-all duration-300;
   }
 
-  /* Modern Button Styles */
-  .btn-nexatech {
+  .card-premium-dark {
+    @apply bg-white rounded-lg shadow-2xl border border-white/20;
+  }
+
+  .accent-chip {
+    @apply inline-flex items-center gap-2 px-3 py-1.5 text-xs font-semibold uppercase tracking-widest
+           text-primary border border-primary/15 bg-white;
+  }
+
+  .btn-hero,
+  .btn-bondcell {
     @apply bg-primary hover:bg-primary-600 text-white font-semibold px-6 py-3 rounded-xl 
-           shadow-lg hover:shadow-xl transform hover:-translate-y-0.5 transition-all duration-200;
+           shadow-lg shadow-primary/20 hover:shadow-xl transform hover:-translate-y-0.5 transition-all duration-200;
   }
 
-  .btn-outline-nexatech {
+  .btn-outline-bondcell {
     @apply border-2 border-primary text-primary hover:bg-primary hover:text-white font-semibold 
            px-6 py-3 rounded-xl transition-all duration-200;
   }
 
-  /* Premium Input Styles */
-  .input-nexatech {
-    @apply w-full px-4 py-3 rounded-xl border-2 border-gray-200 focus:border-primary 
-           focus:ring-4 focus:ring-primary/10 transition-all duration-200;
+  .input-bondcell {
+    @apply w-full px-4 py-3 rounded-xl border-2 border-primary/15 focus:border-primary 
+           focus:ring-4 focus:ring-primary/10 transition-all duration-200 bg-white;
   }
 
-  /* Section Headers */
   .section-header {
     @apply text-3xl md:text-4xl font-bold text-primary mb-4;
   }
 
-  /* Badge Styles */
   .badge-verified {
     @apply inline-flex items-center gap-1.5 px-3 py-1.5 rounded-full 
            bg-success/10 text-success font-semibold text-sm;
@@ -96,12 +109,10 @@
            bg-warning/10 text-warning font-semibold text-sm;
   }
 
-  /* Container */
-  .container-nexatech {
+  .container-bondcell {
     @apply container mx-auto px-4 sm:px-6 lg:px-8 max-w-7xl;
   }
 
-  /* Animations */
   @keyframes float {
     0%, 100% { transform: translateY(0px); }
     50% { transform: translateY(-10px); }

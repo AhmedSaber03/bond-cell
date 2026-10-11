@@ -129,7 +129,7 @@ const AdminLogin = () => {
           {/* Header */}
           <div className="text-center mb-8">
             <div className="flex justify-center mb-6">
-              <Logo className="w-40 " />
+              <Logo />
             </div>
             <h1 className="text-3xl font-black text-primary mb-2">
               {isSignUp ? "Create Admin Account" : "Admin Portal"}
@@ -152,7 +152,7 @@ const AdminLogin = () => {
                 <Input
                   id="email"
                   type="email"
-                  placeholder="Admin@Nexabiotech.com"
+                  placeholder="admin@bondcell.com"
                   value={email}
                   onChange={(e) => setEmail(e.target.value)}
                   className="pl-12 pr-4 py-6 text-base rounded-xl border-2 border-gray-200 focus:border-primary focus:ring-4 focus:ring-primary/10"
@@ -237,7 +237,7 @@ const AdminLogin = () => {
 
         {/* Footer Text */}
         <p className="text-center text-white/70 text-sm mt-6">
-          © {new Date().getFullYear()} Nexa Biotech Solutions. All rights reserved.
+          © {new Date().getFullYear()} Bond&Cell. All rights reserved.
         </p>
       </div>
     </div>

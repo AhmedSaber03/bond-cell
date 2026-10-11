@@ -1,181 +1,271 @@
+import { Link } from "react-router-dom";
 import VerificationForm from "@/components/VerificationForm";
 import FaqSection from "@/components/FaqSection";
 import Header from "@/components/layout/Header";
+import SiteFooter from "@/components/layout/SiteFooter";
+import { BRAND_NAME, LOGO_CLASS_HERO, LOGO_SRC, SUPPORT_EMAIL } from "@/lib/brand";
 import {
-  Shield,
-  Lock,
-  Zap,
-  Globe,
+  ArrowUpRight,
   FlaskConical,
-  ShieldCheck,
+  Microscope,
+  Package,
+  Shield,
 } from "lucide-react";
+import { Button } from "@/components/ui/button";
+
+const pillars = [
+  {
+    num: "01",
+    title: "Verify",
+    body: "Confirm every vial with serial + scratch code before it enters your workflow.",
+    href: "#verify",
+    external: false,
+  },
+  {
+    num: "02",
+    title: "Peptides",
+    body: "Explore SKUs, purity specs, and batch documentation in the catalog.",
+    href: "/products",
+    external: false,
+  },
+  {
+    num: "03",
+    title: "FAQ",
+    body: "RUO policy, shipping, and what to do if a code was already used.",
+    href: "#faq",
+    external: false,
+  },
+  {
+    num: "04",
+    title: "Order",
+    body: "Qualified labs request bulk availability and institutional pricing.",
+    href: "#order",
+    external: false,
+  },
+];
 
 const Index = () => {
-  const features = [
-    {
-      icon: Shield,
-      title: "Secure Authentication",
-      description: "Encrypted verification keeps every product check protected",
-      color: "bg-blue-500",
-    },
-    {
-      icon: Zap,
-      title: "Instant Verification",
-      description: "Authenticate products in under 3 seconds",
-      color: "bg-purple-500",
-    },
-    {
-      icon: Lock,
-      title: "One-Time Access",
-      description: "Each code verifies once, then locks after 60 minutes",
-      color: "bg-green-500",
-    },
-    {
-      icon: Globe,
-      title: "Global Coverage",
-      description: "Trusted worldwide by leading manufacturers",
-      color: "bg-orange-500",
-    },
-  ];
-
-  const stats = [
-    { value: "10M+", label: "Products Verified" },
-    { value: "99.9%", label: "Success Rate" },
-    { value: "150+", label: "Countries" },
-    { value: "<3s", label: "Avg Response Time" },
-  ];
-
   return (
-    <div className="min-h-screen bg-gradient-nexatech">
+    <div className="min-h-screen bg-surface-bondcell">
       <Header />
 
-      {/* Hero Section */}
-      <main className="container-nexatech pt-32 pb-20">
-        <div className="grid lg:grid-cols-2 gap-16 items-center">
-          {/* Left Column - Hero Content */}
-          <div className="space-y-8 animate-fade-in">
-            <div className="inline-flex items-center gap-2 px-4 py-2 bg-white rounded-full shadow-md">
-              <div className="w-2 h-2 bg-green-500 rounded-full animate-pulse"></div>
-              <span className="text-sm font-semibold text-primary">
-                Research Use Only
-              </span>
+      {/* —— Editorial hero (logo-first, not form-first) —— */}
+      <section className="relative pt-28 md:pt-32 pb-0">
+        <div
+          className="pointer-events-none absolute top-36 right-8 z-0 w-20 h-20 lg:w-28 lg:h-28 bg-primary/90 hidden lg:block"
+          aria-hidden
+        />
+        <div
+          className="pointer-events-none absolute top-44 right-40 z-0 w-14 h-14 bg-primary/15 hidden xl:block"
+          aria-hidden
+        />
+
+        <div className="container-bondcell relative z-10">
+          <div className="grid lg:grid-cols-12 gap-10 lg:gap-16 items-end pb-12 md:pb-16 border-b border-primary/10">
+            <div className="lg:col-span-7 space-y-6 md:space-y-8 min-w-0">
+              <span className="accent-chip">Research use only</span>
+              <img
+                src={LOGO_SRC}
+                alt={BRAND_NAME}
+                width={480}
+                height={120}
+                className={LOGO_CLASS_HERO}
+              />
+              <h1 className="text-3xl sm:text-4xl md:text-5xl font-extralight tracking-tight text-primary leading-[1.15] max-w-xl">
+                Peptide authenticity,
+                <span className="block font-normal">built into every unit.</span>
+              </h1>
+              <p className="text-muted-foreground text-lg max-w-lg leading-relaxed">
+                {BRAND_NAME} connects verification, catalog discovery, and bulk
+                ordering for research teams who need traceability—not guesswork.
+              </p>
             </div>
 
-            <h1 className="text-5xl md:text-6xl lg:text-7xl font-bold leading-tight">
-              Verify Your
-              <span className="block bg-gradient-to-r from-primary via-accent to-primary-600 bg-clip-text text-transparent">
-                Nexa Biotech
-              </span>
-              Product
-            </h1>
-
-            <p className="text-xl text-gray-600 max-w-xl leading-relaxed">
-              ALL ARTICLES AND PRODUCT INFORMATION PROVIDED ON THIS WEBSITE ARE
-              FOR INFORMATIONAL AND EDUCATIONAL PURPOSES ONLY.
-            </p>
-
-            {/* Trust Badges */}
-            <div className="flex flex-wrap gap-4 items-center pt-4">
-              <div className="flex items-center gap-2 px-4 py-2 bg-white rounded-xl shadow-sm">
-                <FlaskConical className="w-5 h-5 text-green-500" />
-                <span className="text-sm font-medium">Lab Grade Quality</span>
-              </div>
-              <div className="flex items-center gap-2 px-4 py-2 bg-white rounded-xl shadow-sm">
-                <ShieldCheck className="w-5 h-5 text-blue-500" />
-                <span className="text-sm font-medium">Highly Purified</span>
-              </div>
-              <div className="flex items-center gap-2 px-4 py-2 bg-white rounded-xl shadow-sm">
-                <Shield className="w-5 h-5 text-purple-500" />
-                <span className="text-sm font-medium">Premium Standards</span>
-              </div>
-            </div>
-          </div>
-
-          {/* Right Column - Verification Form */}
-          <div
-            className="lg:pl-8 animate-slide-up"
-            style={{ animationDelay: "200ms" }}
-          >
-            <VerificationForm />
-          </div>
-        </div>
-
-        {/* Stats Section */}
-        <div className="mt-24 card-premium p-12">
-          <div className="text-center">
-            <h2 className="text-3xl md:text-4xl font-bold text-primary mb-4">
-              Trusted Globally
-            </h2>
-            <p className="text-gray-600 text-lg">
-              Ensure authenticity in seconds. Enter your unique serial number
-              and password to verify your product is 100% genuine.
-            </p>
-          </div>
-          {/* <div className="grid grid-cols-2 md:grid-cols-4 gap-8">
-            {stats.map((stat, index) => (
-              <div key={index} className="text-center">
-                <div className="text-4xl md:text-5xl font-bold bg-gradient-to-r from-primary to-accent bg-clip-text text-transparent mb-2">
-                  {stat.value}
+            <div className="lg:col-span-5 grid grid-cols-2 gap-3 md:gap-4">
+              {[
+                { icon: Shield, label: "Anti-counterfeit serials" },
+                { icon: Microscope, label: "Batch COA on verify" },
+                { icon: FlaskConical, label: "Lab-grade peptides" },
+                { icon: Package, label: "Bulk for institutions" },
+              ].map(({ icon: Icon, label }) => (
+                <div
+                  key={label}
+                  className="aspect-square flex flex-col justify-between p-4 md:p-5 bg-white border border-primary/10 shadow-sm"
+                >
+                  <Icon className="w-6 h-6 text-primary" strokeWidth={1.25} />
+                  <p className="text-sm font-medium text-primary leading-snug">
+                    {label}
+                  </p>
                 </div>
-                <div className="text-gray-600 font-medium">{stat.label}</div>
-              </div>
-            ))}
-          </div> */}
+              ))}
+            </div>
+          </div>
         </div>
+      </section>
 
-        {/* Features Grid */}
-        <div className="mt-32 grid sm:grid-cols-2 lg:grid-cols-4 gap-6">
-          {features.map((feature, index) => (
-            <div
-              key={index}
-              className="card-premium p-6 hover:scale-105 transition-transform duration-300"
-              style={{ animationDelay: `${index * 100}ms` }}
+      {/* —— Quick pillar rail —— */}
+      <section className="border-b border-primary/10 bg-white">
+        <div className="container-bondcell">
+          <div className="grid sm:grid-cols-2 lg:grid-cols-4 divide-y sm:divide-y-0 sm:divide-x divide-primary/10">
+            {pillars.map((item) => {
+              const inner = (
+                <>
+                  <span className="text-4xl font-extralight text-primary/25 tabular-nums">
+                    {item.num}
+                  </span>
+                  <span className="text-sm font-semibold uppercase tracking-widest text-primary mt-2">
+                    {item.title}
+                  </span>
+                  <p className="text-sm text-muted-foreground mt-3 leading-relaxed">
+                    {item.body}
+                  </p>
+                  <ArrowUpRight className="w-4 h-4 text-primary mt-4 opacity-60 group-hover:opacity-100 group-hover:translate-x-0.5 group-hover:-translate-y-0.5 transition-all" />
+                </>
+              );
+              const className =
+                "group flex flex-col p-6 md:p-8 hover:bg-muted/40 transition-colors min-h-[180px]";
+
+              if (item.href.startsWith("#")) {
+                return (
+                  <a key={item.num} href={item.href} className={className}>
+                    {inner}
+                  </a>
+                );
+              }
+              return (
+                <Link key={item.num} to={item.href} className={className}>
+                  {inner}
+                </Link>
+              );
+            })}
+          </div>
+        </div>
+      </section>
+
+      {/* —— Verify band (full-width primary — distinct from old split hero) —— */}
+      <section
+        id="verify"
+        className="relative scroll-mt-28 bg-primary text-white py-16 md:py-24"
+      >
+        <div
+          className="absolute inset-0 opacity-[0.07] pointer-events-none"
+          style={{
+            backgroundImage:
+              "linear-gradient(#fff 1px, transparent 1px), linear-gradient(90deg, #fff 1px, transparent 1px)",
+            backgroundSize: "48px 48px",
+          }}
+          aria-hidden
+        />
+        <div className="container-bondcell relative grid lg:grid-cols-2 gap-12 lg:gap-16 items-center">
+          <div className="space-y-6">
+            <span className="inline-block text-xs font-semibold uppercase tracking-[0.25em] text-white/70">
+              Step 01 · Verify
+            </span>
+            <h2 className="text-3xl md:text-4xl font-light leading-tight">
+              Authenticate your peptide
+              <span className="block font-normal">in under three seconds.</span>
+            </h2>
+            <ul className="space-y-4 text-white/85 text-base leading-relaxed">
+              <li className="flex gap-3">
+                <span className="w-8 h-8 shrink-0 flex items-center justify-center bg-white/10 text-sm font-semibold">
+                  1
+                </span>
+                Locate serial on the label and code under the scratch panel.
+              </li>
+              <li className="flex gap-3">
+                <span className="w-8 h-8 shrink-0 flex items-center justify-center bg-white/10 text-sm font-semibold">
+                  2
+                </span>
+                Submit both fields—codes are consumed on first successful check.
+              </li>
+              <li className="flex gap-3">
+                <span className="w-8 h-8 shrink-0 flex items-center justify-center bg-white/10 text-sm font-semibold">
+                  3
+                </span>
+                View product details, COA links, and batch data for 60 minutes.
+              </li>
+            </ul>
+          </div>
+          <VerificationForm showLogo={false} />
+        </div>
+      </section>
+
+      {/* —— Bento: catalog + bulk —— */}
+      <section className="py-16 md:py-24">
+        <div className="container-bondcell">
+          <div className="grid md:grid-cols-12 gap-4 md:gap-5">
+            <Link
+              to="/products"
+              className="md:col-span-7 group relative min-h-[320px] p-8 md:p-10 bg-white border border-primary/10 flex flex-col justify-between overflow-hidden"
             >
               <div
-                className={`${feature.color} w-12 h-12 rounded-xl flex items-center justify-center mb-4 shadow-lg`}
-              >
-                <feature.icon className="w-6 h-6 text-white" />
+                className="absolute -right-8 -top-8 w-40 h-40 bg-primary/5"
+                aria-hidden
+              />
+              <div>
+                <span className="accent-chip mb-6">Step 02 · Peptides</span>
+                <h3 className="text-2xl md:text-3xl font-light text-primary mb-3">
+                  Explore the research catalog
+                </h3>
+                <p className="text-muted-foreground max-w-md leading-relaxed">
+                  Search by name, review specifications, and open full product
+                  sheets before you verify or order.
+                </p>
               </div>
-              <h3 className="text-lg font-bold text-primary mb-2">
-                {feature.title}
-              </h3>
-              <p className="text-gray-600 text-sm leading-relaxed">
-                {feature.description}
-              </p>
-            </div>
-          ))}
-        </div>
+              <span className="inline-flex items-center gap-2 text-sm font-semibold uppercase tracking-wider text-primary group-hover:gap-3 transition-all">
+                Open catalog
+                <ArrowUpRight className="w-4 h-4" />
+              </span>
+            </Link>
 
-        <FaqSection />
-      </main>
-
-      {/* Footer */}
-      <footer className="border-t border-gray-200 bg-white/50 backdrop-blur-sm">
-        <div className="container-nexatech py-12">
-          <div className="flex flex-col md:flex-row items-center justify-between gap-6">
-            <div className="flex items-center gap-2 text-sm text-gray-600">
-              <Shield className="w-4 h-4 text-primary" />
-              <span>Protected by Nexa Biotech Authentication System</span>
-            </div>
-            <div className="flex flex-col md:flex-row items-center gap-4 text-sm text-gray-600">
-              <p>
-                For inquiries and bulk orders, please contact us at <br />
-                <a
-                  href="mailto:sales@nexabiotech.net"
-                  className="font-bold bg-gradient-to-r from-[#002447] to-[#0062F7] bg-clip-text text-transparent opacity-80 hover:opacity-100 transition-opacity duration-300"
-                >
-                  sales@nexabiotech.net
+            <div
+              id="order"
+              className="md:col-span-5 scroll-mt-28 min-h-[320px] p-8 md:p-10 bg-primary text-white flex flex-col justify-between"
+            >
+              <div>
+                <span className="inline-block text-xs font-semibold uppercase tracking-[0.25em] text-white/70 mb-6">
+                  Step 04 · Order
+                </span>
+                <h3 className="text-2xl font-light mb-3">Bulk & institutional</h3>
+                <p className="text-white/80 leading-relaxed">
+                  Volume pricing for universities, CROs, and licensed labs. Tell
+                  us what you need—we respond within two business days.
+                </p>
+              </div>
+              <Button
+                asChild
+                className="w-full bg-white text-primary hover:bg-white/90 rounded-md h-12 font-semibold"
+              >
+                <a href={`mailto:${SUPPORT_EMAIL}?subject=Bulk%20peptide%20order%20inquiry`}>
+                  Request bulk quote
+                  <ArrowUpRight className="w-4 h-4 ml-2" />
                 </a>
-              </p>
+              </Button>
+            </div>
+
+            <div className="md:col-span-12 grid sm:grid-cols-3 gap-4 md:gap-5">
+              {[
+                "Third-party COA per batch",
+                "One-time verification codes",
+                "Global tracked shipping",
+              ].map((text) => (
+                <div
+                  key={text}
+                  className="p-5 bg-muted/60 border border-primary/5 text-center text-sm font-medium text-primary"
+                >
+                  {text}
+                </div>
+              ))}
             </div>
           </div>
-          <div className="mt-6 pt-6 border-t border-gray-200 text-center text-xs text-gray-500">
-            <span>© {new Date().getFullYear()} Nexa Biotech Solutions.</span>
-            <span className="hidden md:inline">•</span>
-            <span>All rights reserved.</span>
-          </div>
         </div>
-      </footer>
+      </section>
+
+      <div className="container-bondcell pb-20">
+        <FaqSection layout="split" className="mt-0" />
+      </div>
+
+      <SiteFooter />
     </div>
   );
 };

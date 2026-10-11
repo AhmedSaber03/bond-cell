@@ -1,10 +1,16 @@
 import { useState } from "react";
 import { useNavigate, Link } from "react-router-dom";
-// import Logo from "@/components/Logo";
-import logo from "../../../public/NexaLogo.png"
+import { LOGO_CLASS_HEADER, LOGO_SRC, SUPPORT_EMAIL } from "@/lib/brand";
 import { Input } from "@/components/ui/input";
 import { Button } from "@/components/ui/button";
-import { Search, Package, Menu, X } from "lucide-react";
+import { Search, Menu, X, Mail } from "lucide-react";
+
+const navLinks = [
+  { label: "Verify", href: "/#verify" },
+  { label: "Peptides", href: "/products" },
+  { label: "FAQ", href: "/#faq" },
+  { label: "Order", href: "/#order" },
+];
 
 const Header = () => {
   const [searchQuery, setSearchQuery] = useState("");
@@ -19,83 +25,107 @@ const Header = () => {
   };
 
   return (
-    <header className="fixed top-0 left-0 right-0 z-50 bg-white/95 backdrop-blur-xl border-b border-gray-200 shadow-sm">
-      <div className="container-nexatech">
-        <div className="flex items-center justify-between gap-4 py-4">
-          {/* <Logo /> */}
-          <Link  to="/">
-          <img src={logo} alt="logo" className="w-32 h-22"/>
+    <header className="fixed top-0 left-0 right-0 z-50 bg-white/95 backdrop-blur-md border-b border-primary/10">
+      <div className="container-bondcell">
+        <div className="flex items-center justify-between gap-3 py-3 md:py-4">
+          <Link to="/" className="shrink-0 py-1">
+            <img
+              src={LOGO_SRC}
+              alt="Bond&Cell"
+              className={LOGO_CLASS_HEADER}
+            />
           </Link>
-          {/* Desktop Search & Navigation */}
-          <div className="hidden lg:flex items-center gap-6 flex-1 justify-center max-w-2xl">
-            <form onSubmit={handleSearch} className="flex-1 relative">
-              <Search className="absolute left-4 top-1/2 -translate-y-1/2 w-5 h-5 text-gray-400" />
-              <Input
-                type="text"
-                placeholder="Search authentic products..."
-                value={searchQuery}
-                onChange={(e) => setSearchQuery(e.target.value)}
-                className="pl-12 pr-4 py-6 rounded-xl border-2 border-gray-200 focus:border-primary focus:ring-4 focus:ring-primary/10 transition-all text-base"
-              />
-            </form>
-          </div>
 
-          <nav className="hidden md:flex items-center gap-3">
-            <Link to="/products">
-              <Button variant="ghost" className="font-semibold hover:bg-primary/5 hover:text-primary">
-                <Package className="w-4 h-4 mr-2" />
-                Browse Products
-              </Button>
-            </Link>
-            {/* <Link to="/admin/login">
-              <Button className="btn-nexatech">
-                Admin Portal
-              </Button>
-            </Link> */}
+          <nav className="hidden lg:flex items-center gap-1">
+            {navLinks.map((link) =>
+              link.href.startsWith("/#") ? (
+                <a
+                  key={link.label}
+                  href={link.href}
+                  className="px-4 py-2 text-sm font-medium uppercase tracking-wider text-primary/70 hover:text-primary transition-colors"
+                >
+                  {link.label}
+                </a>
+              ) : (
+                <Link
+                  key={link.label}
+                  to={link.href}
+                  className="px-4 py-2 text-sm font-medium uppercase tracking-wider text-primary/70 hover:text-primary transition-colors"
+                >
+                  {link.label}
+                </Link>
+              )
+            )}
           </nav>
 
-          {/* Mobile Menu Button */}
+          <div className="hidden md:flex items-center gap-2 flex-1 justify-end max-w-md">
+            <form onSubmit={handleSearch} className="flex-1 relative max-w-xs lg:max-w-sm">
+              <Search className="absolute left-3 top-1/2 -translate-y-1/2 w-4 h-4 text-muted-foreground" />
+              <Input
+                type="text"
+                placeholder="Search peptides..."
+                value={searchQuery}
+                onChange={(e) => setSearchQuery(e.target.value)}
+                className="pl-10 h-11 rounded-md border-primary/15 bg-muted/50 focus:bg-white"
+              />
+            </form>
+            <a href={`mailto:${SUPPORT_EMAIL}?subject=Bulk%20order%20inquiry`}>
+              <Button className="btn-bondcell rounded-md h-11 px-5 hidden xl:inline-flex">
+                <Mail className="w-4 h-4 mr-2" />
+                Bulk
+              </Button>
+            </a>
+          </div>
+
           <Button
             variant="ghost"
             size="icon"
-            className="md:hidden"
+            className="lg:hidden shrink-0"
             onClick={() => setMobileMenuOpen(!mobileMenuOpen)}
+            aria-label={mobileMenuOpen ? "Close menu" : "Open menu"}
           >
-            {mobileMenuOpen ? <X className="w-6 h-6" /> : <Menu className="w-6 h-6" />}
+            {mobileMenuOpen ? (
+              <X className="w-6 h-6" />
+            ) : (
+              <Menu className="w-6 h-6" />
+            )}
           </Button>
         </div>
 
-        {/* Mobile Menu */}
         {mobileMenuOpen && (
-          <div className="md:hidden py-4 space-y-4 border-t border-gray-200 animate-fade-in">
+          <div className="lg:hidden py-4 space-y-4 border-t border-primary/10 animate-fade-in pb-6">
             <form onSubmit={handleSearch} className="relative">
-              <Search className="absolute left-4 top-1/2 -translate-y-1/2 w-5 h-5 text-gray-400" />
+              <Search className="absolute left-3 top-1/2 -translate-y-1/2 w-4 h-4 text-muted-foreground" />
               <Input
                 type="text"
-                placeholder="Search products..."
+                placeholder="Search peptides..."
                 value={searchQuery}
                 onChange={(e) => setSearchQuery(e.target.value)}
-                className="pl-12 pr-4 py-3 rounded-xl border-2 border-gray-200"
+                className="pl-10 rounded-md border-primary/15"
               />
             </form>
-            <div className="flex flex-col gap-2">
-              <Link
-                to="/products"
-                onClick={() => setMobileMenuOpen(false)}
-              >
-                <Button variant="outline" className="w-full justify-start">
-                  <Package className="w-4 h-4 mr-2" />
-                  Browse Products
-                </Button>
-              </Link>
-              {/* <Link
-                to="/admin/login"
-                onClick={() => setMobileMenuOpen(false)}
-              >
-                <Button className="w-full btn-nexatech">
-                  Admin Portal
-                </Button>
-              </Link> */}
+            <div className="grid grid-cols-2 gap-2">
+              {navLinks.map((link) =>
+                link.href.startsWith("/#") ? (
+                  <a
+                    key={link.label}
+                    href={link.href}
+                    onClick={() => setMobileMenuOpen(false)}
+                    className="flex items-center justify-center py-3 text-sm font-semibold uppercase tracking-wide border border-primary/15 rounded-md text-primary"
+                  >
+                    {link.label}
+                  </a>
+                ) : (
+                  <Link
+                    key={link.label}
+                    to={link.href}
+                    onClick={() => setMobileMenuOpen(false)}
+                    className="flex items-center justify-center py-3 text-sm font-semibold uppercase tracking-wide border border-primary/15 rounded-md text-primary"
+                  >
+                    {link.label}
+                  </Link>
+                )
+              )}
             </div>
           </div>
         )}

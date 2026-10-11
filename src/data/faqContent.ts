@@ -1,3 +1,5 @@
+import { BRAND_NAME, SUPPORT_EMAIL } from "@/lib/brand";
+
 export interface FaqItem {
   id?: string;
   category: string;
@@ -17,7 +19,7 @@ export const FAQ_CATEGORIES = [
 export type FaqCategory = (typeof FAQ_CATEGORIES)[number];
 
 export const FAQ_INTRO =
-  'Everything about verifying your product, our testing standards, ordering, and what "research use only" means. Can\'t find your answer? Email sales@nexabiotech.net — we reply within 2 business days.';
+  `Everything about verifying your product, our testing standards, ordering, and what "research use only" means. Can't find your answer? Email ${SUPPORT_EMAIL} — we reply within 2 business days.`;
 
 export const FAQ_BOTTOM =
   "Still stuck? Send us your serial number (not the scratch-off code), a photo of the packaging if relevant, and where you purchased the product. We reply within 2 business days.";
@@ -43,7 +45,7 @@ export const FALLBACK_FAQS: FaqItem[] = [
     question:
       'The site says "already verified" but this is my first time. What now?',
     answer:
-      "Treat the product as suspect and do not use it. Every code works exactly once, so a previous verification means either the code was copied or the unit was sold before. Email sales@nexabiotech.net with a photo of the packaging and where you bought it; we investigate within 2 business days.",
+      `Treat the product as suspect and do not use it. Every code works exactly once, so a previous verification means either the code was copied or the unit was sold before. Email ${SUPPORT_EMAIL} with a photo of the packaging and where you bought it; we investigate within 2 business days.`,
     sort_order: 3,
   },
   {
@@ -76,7 +78,7 @@ export const FALLBACK_FAQS: FaqItem[] = [
   },
   {
     category: "Orders & shipping",
-    question: "Who can order from Nexa Biotech?",
+    question: `Who can order from ${BRAND_NAME}?`,
     answer:
       "Qualified institutional and commercial research customers — universities, contract research organizations, and licensed laboratories — ordering in bulk. We do not sell to individuals or single-unit retail buyers, and we may ask for institutional documentation before fulfilling an order.",
     sort_order: 8,
