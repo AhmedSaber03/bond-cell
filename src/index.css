@@ -1,0 +1,113 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@layer base {
+  :root {
+    --background: 0 0% 100%;
+    --foreground: 210 100% 14%;
+
+    --card: 0 0% 100%;
+    --card-foreground: 210 100% 14%;
+
+    --popover: 0 0% 100%;
+    --popover-foreground: 210 100% 14%;
+
+    --primary: 210 100% 14%;
+    --primary-foreground: 0 0% 100%;
+
+    --secondary: 0 0% 100%;
+    --secondary-foreground: 210 100% 14%;
+
+    --muted: 210 20% 97%;
+    --muted-foreground: 215 16% 47%;
+
+    --accent: 213 100% 50%;
+    --accent-foreground: 0 0% 100%;
+
+    --destructive: 4 90% 58%;
+    --destructive-foreground: 0 0% 100%;
+
+    --success: 145 100% 39%;
+    --success-foreground: 0 0% 100%;
+
+    --warning: 36 100% 50%;
+    --warning-foreground: 0 0% 100%;
+
+    --border: 214 32% 91%;
+    --input: 214 32% 91%;
+    --ring: 210 100% 14%;
+
+    --radius: 0.75rem;
+  }
+}
+
+@layer base {
+  * {
+    @apply border-border;
+  }
+  body {
+    @apply bg-background text-foreground;
+    font-feature-settings: "rlig" 1, "calt" 1;
+  }
+}
+
+@layer components {
+  /* Premium Gradient Background */
+  .bg-gradient-nexatech {
+    @apply bg-gradient-to-br from-white via-blue-50 to-primary-50;
+  }
+
+  /* Premium Card Styles */
+  .card-premium {
+    @apply bg-white rounded-2xl shadow-lg border border-gray-100 hover:shadow-xl transition-all duration-300;
+  }
+
+  /* Modern Button Styles */
+  .btn-nexatech {
+    @apply bg-primary hover:bg-primary-600 text-white font-semibold px-6 py-3 rounded-xl 
+           shadow-lg hover:shadow-xl transform hover:-translate-y-0.5 transition-all duration-200;
+  }
+
+  .btn-outline-nexatech {
+    @apply border-2 border-primary text-primary hover:bg-primary hover:text-white font-semibold 
+           px-6 py-3 rounded-xl transition-all duration-200;
+  }
+
+  /* Premium Input Styles */
+  .input-nexatech {
+    @apply w-full px-4 py-3 rounded-xl border-2 border-gray-200 focus:border-primary 
+           focus:ring-4 focus:ring-primary/10 transition-all duration-200;
+  }
+
+  /* Section Headers */
+  .section-header {
+    @apply text-3xl md:text-4xl font-bold text-primary mb-4;
+  }
+
+  /* Badge Styles */
+  .badge-verified {
+    @apply inline-flex items-center gap-1.5 px-3 py-1.5 rounded-full 
+           bg-success/10 text-success font-semibold text-sm;
+  }
+
+  .badge-pending {
+    @apply inline-flex items-center gap-1.5 px-3 py-1.5 rounded-full 
+           bg-warning/10 text-warning font-semibold text-sm;
+  }
+
+  /* Container */
+  .container-nexatech {
+    @apply container mx-auto px-4 sm:px-6 lg:px-8 max-w-7xl;
+  }
+
+  /* Animations */
+  @keyframes float {
+    0%, 100% { transform: translateY(0px); }
+    50% { transform: translateY(-10px); }
+  }
+
+  .animate-float {
+    animation: float 3s ease-in-out infinite;
+  }
+}
