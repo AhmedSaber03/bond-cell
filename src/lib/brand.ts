@@ -10,7 +10,7 @@ export const FAVICON_SRC = "/FavIcon.png";
 
 /** Shared Tailwind classes — height-led sizing for the wordmark asset */
 export const LOGO_CLASS_HEADER =
-  "block h-16 w-auto max-w-[360px] object-contain object-left";
+  "block h-8 w-auto max-w-[360px] object-contain object-left";
 
 export const LOGO_CLASS_DEFAULT =
   "h-16 sm:h-[4.25rem] md:h-20 w-auto max-w-[320px] sm:max-w-[360px] object-contain";

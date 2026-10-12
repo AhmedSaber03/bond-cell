@@ -1,0 +1,12 @@
+{
+  "mcpServers": {
+    "supabase-bondcell": {
+      "type": "http",
+      "url": "https://mcp.supabase.com/mcp?project_ref=jgfqvqrhexeomvurmdas&features=docs%2Cdatabase%2Cdevelopment"
+    },
+    "supabase-nexa-source": {
+      "type": "http",
+      "url": "https://mcp.supabase.com/mcp?project_ref=cxvzqzrswnsetbbfltbt&features=docs%2Cdatabase&read_only=true"
+    }
+  }
+}

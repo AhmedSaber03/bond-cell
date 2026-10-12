@@ -4,6 +4,7 @@ import { LOGO_CLASS_HEADER, LOGO_SRC, SUPPORT_EMAIL } from "@/lib/brand";
 import { Input } from "@/components/ui/input";
 import { Button } from "@/components/ui/button";
 import { Search, Menu, X, Mail } from "lucide-react";
+import LogoHeader from "../../../public/Logo main Bold.png";
 
 const navLinks = [
   { label: "Verify", href: "/#verify" },
@@ -30,7 +31,7 @@ const Header = () => {
         <div className="flex items-center justify-between gap-3 py-3 md:py-4">
           <Link to="/" className="shrink-0 py-1">
             <img
-              src={LOGO_SRC}
+              src={LogoHeader}
               alt="Bond&Cell"
               className={LOGO_CLASS_HEADER}
             />
@@ -54,12 +55,15 @@ const Header = () => {
                 >
                   {link.label}
                 </Link>
-              )
+              ),
             )}
           </nav>
 
           <div className="hidden md:flex items-center gap-2 flex-1 justify-end max-w-md">
-            <form onSubmit={handleSearch} className="flex-1 relative max-w-xs lg:max-w-sm">
+            <form
+              onSubmit={handleSearch}
+              className="flex-1 relative max-w-xs lg:max-w-sm"
+            >
               <Search className="absolute left-3 top-1/2 -translate-y-1/2 w-4 h-4 text-muted-foreground" />
               <Input
                 type="text"
@@ -124,7 +128,7 @@ const Header = () => {
                   >
                     {link.label}
                   </Link>
-                )
+                ),
               )}
             </div>
           </div>

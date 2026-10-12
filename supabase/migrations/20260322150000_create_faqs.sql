@@ -59,7 +59,7 @@ SELECT * FROM (VALUES
   (
     'Verification',
     'The site says "already verified" but this is my first time. What now?',
-    'Treat the product as suspect and do not use it. Every code works exactly once, so a previous verification means either the code was copied or the unit was sold before. Email sales@nexabiotech.net with a photo of the packaging and where you bought it; we investigate within 2 business days.',
+    'Treat the product as suspect and do not use it. Every code works exactly once, so a previous verification means either the code was copied or the unit was sold before. Email sales@bondcell.com with a photo of the packaging and where you bought it; we investigate within 2 business days.',
     3
   ),
   (
@@ -88,7 +88,7 @@ SELECT * FROM (VALUES
   ),
   (
     'Orders & shipping',
-    'Who can order from Nexa Biotech?',
+    'Who can order from Bond&Cell?',
     'Qualified institutional and commercial research customers — universities, contract research organizations, and licensed laboratories — ordering in bulk. We do not sell to individuals or single-unit retail buyers, and we may ask for institutional documentation before fulfilling an order.',
     8
   ),

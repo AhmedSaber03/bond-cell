@@ -6,7 +6,16 @@ import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import { Label } from "@/components/ui/label";
 import { useToast } from "@/hooks/use-toast";
-import { Lock, Mail, Loader2, ArrowLeft, UserPlus, Shield, Eye, EyeOff } from "lucide-react";
+import {
+  Lock,
+  Mail,
+  Loader2,
+  ArrowLeft,
+  UserPlus,
+  Shield,
+  Eye,
+  EyeOff,
+} from "lucide-react";
 
 const AdminLogin = () => {
   const [email, setEmail] = useState("");
@@ -19,7 +28,9 @@ const AdminLogin = () => {
 
   useEffect(() => {
     const checkAuth = async () => {
-      const { data: { session } } = await supabase.auth.getSession();
+      const {
+        data: { session },
+      } = await supabase.auth.getSession();
       if (session) {
         const { data: roles } = await supabase
           .from("user_roles")
@@ -27,7 +38,7 @@ const AdminLogin = () => {
           .eq("user_id", session.user.id);
 
         const hasAdminAccess = roles?.some(
-          r => r.role === "admin" || r.role === "super_admin"
+          (r) => r.role === "admin" || r.role === "super_admin",
         );
 
         if (hasAdminAccess) {
@@ -73,7 +84,7 @@ const AdminLogin = () => {
           .eq("user_id", data.user.id);
 
         const hasAdminAccess = roles?.some(
-          r => r.role === "admin" || r.role === "super_admin"
+          (r) => r.role === "admin" || r.role === "super_admin",
         );
 
         if (!hasAdminAccess) {
@@ -110,7 +121,10 @@ const AdminLogin = () => {
       {/* Animated Background Elements */}
       <div className="absolute inset-0 overflow-hidden">
         <div className="absolute top-1/4 -left-20 w-96 h-96 bg-blue-500/10 rounded-full blur-3xl animate-pulse"></div>
-        <div className="absolute bottom-1/4 -right-20 w-96 h-96 bg-purple-500/10 rounded-full blur-3xl animate-pulse" style={{animationDelay: "1s"}}></div>
+        <div
+          className="absolute bottom-1/4 -right-20 w-96 h-96 bg-purple-500/10 rounded-full blur-3xl animate-pulse"
+          style={{ animationDelay: "1s" }}
+        ></div>
       </div>
 
       <div className="w-full max-w-md relative z-10">
@@ -152,7 +166,7 @@ const AdminLogin = () => {
                 <Input
                   id="email"
                   type="email"
-                  placeholder="admin@bondcell.com"
+                  placeholder="admin@bondandcell.com"
                   value={email}
                   onChange={(e) => setEmail(e.target.value)}
                   className="pl-12 pr-4 py-6 text-base rounded-xl border-2 border-gray-200 focus:border-primary focus:ring-4 focus:ring-primary/10"
@@ -182,7 +196,11 @@ const AdminLogin = () => {
                   onClick={() => setShowPassword(!showPassword)}
                   className="absolute right-4 top-1/2 -translate-y-1/2 text-gray-400 hover:text-gray-600"
                 >
-                  {showPassword ? <EyeOff className="w-5 h-5" /> : <Eye className="w-5 h-5" />}
+                  {showPassword ? (
+                    <EyeOff className="w-5 h-5" />
+                  ) : (
+                    <Eye className="w-5 h-5" />
+                  )}
                 </button>
               </div>
             </div>
@@ -226,7 +244,9 @@ const AdminLogin = () => {
             <div className="flex gap-3">
               <Shield className="w-5 h-5 text-blue-600 flex-shrink-0 mt-0.5" />
               <div className="text-sm">
-                <p className="font-semibold text-blue-900 mb-1">Secure Access</p>
+                <p className="font-semibold text-blue-900 mb-1">
+                  Secure Access
+                </p>
                 <p className="text-blue-700">
                   All connections are encrypted and monitored for security.
                 </p>
